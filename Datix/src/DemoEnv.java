@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,14 +12,18 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.interactions.Actions;
+
+
 
 public class DemoEnv {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
+
+//DODCR-196
 		
-		//DODCR-197	
 		
 			//envoke Chrome Object Browser 	
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Eclipes\\ChromeDriver\\chromedriver.exe");
@@ -54,39 +60,34 @@ public class DemoEnv {
 			//selecting Forward Button
 		driver.navigate().forward();
 		
+		
+		
+//DODCR-197	///////////////////////
+		
+		
 		//-------------------------------------------------------------------------------
-	/*	
+	
+		
+		
+		/*	
 		//select date from Calendar 
 		//Event Date Calendar 				ui-state-default
 		driver.findElement(By.xpath("//*[@id=\'inc_dincident_row\']/div[2]/img")).click();
 		
 		List<WebElement> dates= driver.findElement(By.className("ui-state-default"));
 		*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				
+		//*[@id'select_user']/tr[1]/td[1]/a    waitForElementPresent			??????
 		
 		///////////!!!!!!!!!!!!!!!!!!!!!!!!!!!
 /*		
-			//verify Text is Present 
+		//verify Text is Present 
 		public class IsTextPresent
 		extends SeleneseCommand<java.lang.Boolean>
 		
 		boolean isTextPrest=false;
-		isTextPrest=driver.findElement(By.xpath("//*[@id='datix-content']/div[1]/div[1]/div/span")).isDisplayed();
-		
+		isTextPrest=driver.findElement(By.xpath("//*[@id='datix-content']/div[1]/div[1]/div/span")).isDisplayed();	
 */	
-		
-		
-		
-		
 		
 		//////////////////////////////////////
 		
@@ -98,9 +99,9 @@ public class DemoEnv {
 		
 		//		**Event details** -------->>> 
 		
-		//Has the patient received enroute care in the past 24 hours?  
-		//DropDown (Yes/No)
-		//Selecting (Yes) in value 
+			//Has the patient received enroute care in the past 24 hours?  
+			//DropDown (Yes/No)
+			//Selecting (Yes) in value 
 					//note, xPath remove " to ' (double quotes to single quotes)
 					//note to verify xPath  $x("//*[@id=\'img_add_UDF_Y_0_195\']") in chrome "Console" 
 		driver.findElement(By.xpath("//*[@id=\'img_add_UDF_Y_0_195\']")).click();
@@ -118,6 +119,143 @@ public class DemoEnv {
 			//Calendar 
 		driver.findElement(By.cssSelector("#UDF_D_4_2")).sendKeys("12/04/2018");
 		
+			// Scroll Down page 
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0,500)", "");
+		
+/*			//Scroll Up page
+		jse.executeScript("scroll(0, -250);");
+*/		
+	
+	//	Thread.sleep(5000);
+		
+		
+//////////Was the event reported in another system?
+		//DropDown (Yes/No)
+		//Selecting (Yes) in value 
+		
+//		driver.findElement(By.xpath("//*[@id='img_add_UDF_Y_0_143']")).click();
+//		driver.findElement(By.xpath("/html/body/div[@class='datixSelect']/ul/li[@id='Y']")).submit();
+//		driver.findElement(By.xpath("/html/body/div[@class='datixSelect']/ul/li[@id='N']")).click();
+//		driver.findElement(By.cssSelector("#Y")).click();
+//		driver.findElement(By.xpath("<li class=\"datixSelectOption\" id=\"Y\" onmouseover=\"jQuery('#UDF_Y_0_195_title').activate(this);\" onmouseout=\"jQuery('#UDF_Y_0_195_title').deactivate();\" onmousedown=\"jQuery('#UDF_Y_0_195_title').selectItem(this);\">Yes</li>")).click();
+//		driver.findElement(By.tagName("Yes")).click();
+//		driver.findElement(By.xpath("//*[@id=\'UDF_Y_0_143_title\']")).sendKeys("Yes");
+//		driver.findElement(By.id("//*[@id=\\'UDF_Y_0_143_title\\']")).sendKeys(Keys.RETURN);
+//		driver.findElement(By.id("//*[@id=\\'UDF_Y_0_143_title\\']")).sendKeys(Keys.ENTER);
+		
+//		Actions action = new Actions(driver);
+//		action.contextClick(driver.findElement(By.id("//*[@id=\\'UDF_Y_0_143_title\\']"))) 
+//		                .sendKeys(Keys.ARROW_DOWN).build()
+//						.sendKeys(Keys.TAB).build()     /* one or the other  */
+//		                .perform();
+		
+//		driver.findElement(By.xpath("//*[@id='img_add_UDF_Y_0_143']")).click();		
+//		Actions action = new Actions(driver);
+//			WebElement btnElement=driver.findElement(By.xpath("//*[@id=\"Y\"]"));
+//			action.doubleClick(btnElement).build().perform();	
+		
+//			Select dp = new Select(driver.findElement(By.id("dp")));
+//				dp.selectByVisibleText("Yes");
+//				dp.selectByIndex(1);
+		
+
+
+		
+
+		
+
+		//Calander discovery date icon select
+		driver.findElement(By.xpath("//*[@id=\"UDF_D_4_2\"]")).clear();
+		driver.findElement(By.xpath("//*[@id=\"UDF_D_4_2_row\"]/div[2]/img")).click();
+//		driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[2]/button[1]")).click();
+		//NOTE, I took out part of the Class name bc of spaces. org is "ui-state-default ui-state-highlight"
+		driver.findElement(By.className("ui-state-highlight")).click();
+
+		
+	
+		//Submit Button to not filled out to Alert
+		driver.findElement(By.id("btnSubmit")).click();
+		driver.findElement(By.id("button_0")).click();
+			
+		
+		
+		/*		
+		//Location Comments Spelling ABC BUTTON Click    - works but unable to switch back
+		driver.findElement(By.xpath("//*[@id=\"UDF_L_0_157_row\"]/div[2]/img")).click();
+		//new page popUp
+//		driver.switchTo().window("http://dod.datixweb.co.uk/demo/thirdpartylibs/phpspellcheck/dialog.html?instance=0").close();	
+//		driver.switchTo().window("http://dod.datixweb.co.uk/demo/thirdpartylibs/phpspellcheck/dialog.html?instance=0").close();
+*/	
+		
+		
+		/*
+		
+		List<WebElement> options = driver.findElements(By.xpath("//*[@id=\"Y\"]"));
+        System.out.println("options are >>> "   + options.size());
+        for(WebElement element : options){                              
+            System.out.println(element.getText());
+            Thread.sleep(3000);
+         if(element.getText().equals("Yes")){
+            element.click();	
+         }		
+        }
+		
+		
+		*/
+		
+		
+		
+		
+		
+	/*	
+		
+		//Submit Button to not filled out to Alert
+		driver.findElement(By.id("btnSubmit")).click();
+		driver.findElement(By.id("button_0")).click();
+		
+		//Calander discovery date icon select
+		driver.findElement(By.xpath("//*[@id=\"UDF_D_4_2\"]")).clear();
+		
+		driver.findElement(By.xpath("//*[@id=\"UDF_D_4_2_row\"]/div[2]/img")).click();
+//		driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/div[2]/button[1]")).click();
+		//NOTE, I took out part of the Class name bc of spaces. org is "ui-state-default ui-state-highlight"
+		driver.findElement(By.className("ui-state-highlight")).click();
+*/
+		
+		/*		
+		//Location Comments Spelling ABC BUTTON Click    - works but unable to switch back
+		driver.findElement(By.xpath("//*[@id=\"UDF_L_0_157_row\"]/div[2]/img")).click();
+		//new page popUp
+//		driver.switchTo().window("http://dod.datixweb.co.uk/demo/thirdpartylibs/phpspellcheck/dialog.html?instance=0").close();	
+//		driver.switchTo().window("http://dod.datixweb.co.uk/demo/thirdpartylibs/phpspellcheck/dialog.html?instance=0").close();
+*/	
+		
+		
+		//Location Comments Input text check
+		driver.findElement(By.xpath("//*[@id=\"UDF_L_0_157\"]")).sendKeys("!@#$%^&*(+|}{PPOIUYTREE~789456123/./clone();");
+		
+		
+		//find text of  "TRANSCOM DEMO SITE (DIF 1)" text
+// x	public java.lang.String getText()
+// x	driver.getText("");
+		
+		
+//		driver.findElement(By.xpath("//*[@id=\"img_add_UDF_Y_0_143\"]")).click();
+//		driver.findElement(By.xpath("//*[@id=\"Y\"][@id='Y']")).click();	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+/*		
 		Thread.sleep(5000);
 		
 
@@ -135,7 +273,7 @@ public class DemoEnv {
 		driver. findElement(By.cssSelector("#img_add_UDF_Y_0_143")).click();
 		Action selectobject = drpdwn.movetoElement(findElements(By.linkText("Yes")).click().build();
 		selectobject.perform();
-		
+*/		
 		/*
 		
 		List <WebElement> elementCount = driver.findElements(By.xpath("//*[@id=\"Y\"]"));
@@ -199,7 +337,7 @@ public class DemoEnv {
 		
 		//////////////////////////////////////////		
 		
-		/*
+		
 		//Mission ID	input data field
 		driver.findElement(By.id("UDF_S_0_147")).sendKeys("N/A");
 		
@@ -216,7 +354,7 @@ public class DemoEnv {
 		driver.findElement(By.id("UDF_L_2_1")).sendKeys("Min / Max Charictores HEREeeeeeeeeeeeeeeeee");
 	
 		
-		
+	///////TEST for GIT
 
 //		Thread.sleep(4000L);		
 		driver.manage().window().maximize();
@@ -228,6 +366,7 @@ public class DemoEnv {
 
 //		driver.switchto().window		
 		
-*/
+
 }
 }
+

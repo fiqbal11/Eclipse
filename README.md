@@ -1,8 +1,13 @@
 # Eclipse
 /*
+
+C:\Users\FarooqIqbal\git\repository/Datix   = MAIN PULL  / Main project 
 C:\Users\FarooqIqbal\git\repository
       Datix 
-          
+ 
+C:\Users\FarooqIqbal\git\Eclipse/Datix      = Empty folder
+
+
  C:\Users\FarooqIqbal\eclipse-workspace    
       
  C:\Program Files\Eclipes

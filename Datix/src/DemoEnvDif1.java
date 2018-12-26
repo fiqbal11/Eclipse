@@ -8,15 +8,16 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.SoftAssert;
 
 public class DemoEnvDif1 {
 
 	public static void main(String[] args) throws InterruptedException {
 		 // TODO Auto-generated method stub
 
-//DODCR-196	
+		
 
-        
+//DODCR-196	
 		//Envoke Chrome Object Browser 	
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Eclipes\\ChromeDriver\\chromedriver.exe");
 		//System.setProperty("webdriver.ie.driver", "C:\\Program Files\\Eclipes\\InternetExplorerDriver\\MicrosoftWebDriver.exe");
@@ -26,7 +27,9 @@ public class DemoEnvDif1 {
         //WebDriver driver = new InternetExplorerDriver();
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
+       
         
+       // @Test(priority=1)
 //DODCR-196	 
         System.out.println("DODCR-196");     
         
@@ -40,6 +43,8 @@ public class DemoEnvDif1 {
                            
         Thread.sleep(6000);
         
+        
+    
 //DODCR-197
         System.out.println("DODCR-197");
         
@@ -54,28 +59,27 @@ public class DemoEnvDif1 {
                
                //Event time (hh:mm)
                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inc_time"))).sendKeys("02:45");
+               
                //Discovery Date 
                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("UDF_D_4_2"))).sendKeys("01/22/2019");
                
-               
-               
-               
-               //Was the event reported in another system?
+               //Was the event reported in another system? 		,Yes=TRIGGER
                DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_Y_0_143\"]", "/html/body/div[7]/ul/li", "Yes");
-               
-               //System
-               DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_C_0_149\"]", "/html/body/div[8]/ul/li", "OTHER");
-
-      //Reported in System not included in picklist          
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'UDF_S_0_146\']"))).sendKeys("N/A");
-            
+               		//>>TRIGGERED   System	,OTHER=TRIGGERs
+               		DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_C_0_149\"]", "/html/body/div[8]/ul/li", "OTHER");
+               			//>>TRIGGERED     Reported in System not included in picklist          
+               			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\'UDF_S_0_146\']"))).sendKeys("N/A");
                
                //Mission ID
                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("UDF_S_0_147"))).sendKeys("123456");
                
-               //Mode of Transit
+               //Mode of Transit		,AE=TRIGGER (4)
                DropDownValueSelectMethod(driver, "//*[@id=\"img_add_inc_ot_q20\"]", "/html/body/div[9]/ul/li", "AMBULANCE");
-
+               		//Type of Aircraft	, OTHER=TRIGGER (1)
+               				//>>TRIGGERED   Aircraft type not included in picklist
+               		//Tail Number
+               		//Emplaning ICAO
+               		//Deplaning ICAO
                             
                //Originating Facility
                DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_C_0_154\"]", "/html/body/div[10]/ul/li", "18TH MED GRP - KADENA AB");
@@ -115,12 +119,7 @@ public class DemoEnvDif1 {
                //Reporter's Recommendations
                wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("UDF_L_2_1"))).sendKeys("This IS Test");
 
-               
-               
-               
-               
-               
-               
+
                /*Section  - Required Information */
                
                //Degree of harm
@@ -173,8 +172,33 @@ public class DemoEnvDif1 {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"UDF_L_0_162_6\"]"))).sendKeys("This IS Test");
     
     //Diagnosis
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"UDF_L_0_163_6\"]"))).sendKeys("This IS Test");
     
-               
+    //Did the patient receive medical evaluation and/or treatment following the event?
+    DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_Y_0_165_6\"]", "/html/body/div[20]/ul/li", "Yes"); 
+    
+    //Was the patient evaluated and/or treated by a credential provider on an aircraft or a flightline?
+    DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_C_0_193_6\"]", "/html/body/div[21]/ul/li", "Aircraft"); 
+
+    
+    //Was the patient evaluated and/or treated by a MTF?	>  TRIGGER
+    DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_Y_0_168_6\"]", "/html/body/div[22]/ul/li", "Yes"); 
+
+    	//TRIGGER  >  MTF or Location Name
+    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"UDF_S_0_169_6\"]"))).sendKeys("This IS Test");
+
+    
+    //If evaluation or treatment was recommended was it refused?
+    DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_Y_0_170_6\"]", "/html/body/div[23]/ul/li", "Yes"); 
+ 
+    //Patient Movement Classification
+    DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_C_0_171_6\"]", "/html/body/div[24]/ul/li", "9V - MEDPAX"); 
+ 
+    //Movement Precedence
+    DropDownValueSelectMethod(driver, "//*[@id=\"img_add_UDF_C_0_172_6\"]", "/html/body/div[25]/ul/li", "Routine"); 
+  
+   
+    //Details of person reporting the event  
                /* Reporter  */
                
                //Last Name      //*[@id="con_surname_6_row"]/div[2]
@@ -183,15 +207,26 @@ public class DemoEnvDif1 {
                //First Name
                driver.findElement(By.xpath("//*[@id=\"con_forenames_3\"]")).sendKeys("Test");
                
-               
                //Status
-               DropDownValueSelectMethod(driver, "//*[@id=\"img_add_con_type_3\"]", "/html/body/div[20]/ul/li", "Civilian");        
-
+               DropDownValueSelectMethod(driver, "//*[@id=\"img_add_con_type_3\"]", "/html/body/div[26]/ul/li", "Civilian");
                
                //Status detail
-               DropDownValueSelectMethod(driver, "//*[@id=\"img_add_con_subtype_3\"]", "/html/body/div[21]/ul/li", "Pharmacy Technician");        
+               DropDownValueSelectMethod(driver, "//*[@id=\"img_add_con_subtype_3\"]", "/html/body/div[27]/ul/li", "Pharmacy Technician");        
 
+               //E-mail
+           	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"con_email_3\"]"))).sendKeys("farooq.iqbal@datixusa.com");
+
+           	//Telephone
+           	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"con_tel1_3\"]"))).sendKeys("703-123-1234");
+           	
+
+               
          
+               
+               
+   
+               
+               
            /*    
                //Status
                DropDownValueSelectMethod(driver, "//*[@id=\"img_add_con_type_3\"]", "/html/body/div[17]/ul/li", "Civilian");                   
@@ -199,6 +234,8 @@ public class DemoEnvDif1 {
             */
                              
            }
+	
+/////////Method of Selecting Dropdowns			//DropDownValueSelectMethod(driver, "//*[@id=\"img_add_con_type_3\"]", "/html/body/div[17]/ul/li", "Civilian");
 
    private static void DropDownValueSelectMethod(WebDriver driver, String ddButtonXpath, String ChoiceVauesXpath, String SelectChoiceValue) throws InterruptedException {    
        WebElement dropDown = driver.findElement(By.xpath(ddButtonXpath));
@@ -213,9 +250,44 @@ public class DemoEnvDif1 {
             System.out.println("Values " + element.getAttribute("innerHTML"));
         if(element.getText().equals(SelectChoiceValue)){
            element.click();
+       } 
        }
-        
+       
+       
+       
+       
+       
+       
+       
+       
+
+		
+		
+       
+////////Method for Verify Text is present on page in a specific area             //VerifyDisplayedText(driver, assertion, "//*[@id=\"datix-content\"]/div[1]/div[1]/div/font/font/b", "Reporting is anonymous unless reporter detail is completed");
+       private static void VerifyDisplayedText(WebDriver driver, SoftAssert assertion, String WeblementXpath, String actualText) {
+           WebElement element = driver.findElement(By.xpath(WeblementXpath));
+           String expectedText = element.getText();
+           System.out.println("Text suppose to be :" + expectedText.replaceAll("\\s", " "));
+
+           String assertionError = "Text Matched";
+        try {
+           assertion.assertEquals(actualText, expectedText.replaceAll("\\s", " "));
+           assertion.assertAll();   
+        }
+        catch (AssertionError e) 
+           {
+             assertionError = e.toString();
+           }
+           System.out.println(assertionError);
        }
+
+       
+       
+       
+       
+       
+       
    }
 
 }

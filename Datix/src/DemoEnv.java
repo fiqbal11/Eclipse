@@ -1,3 +1,6 @@
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +14,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.interactions.Actions;
 
 
@@ -27,7 +35,13 @@ public class DemoEnv {
 		
 			//envoke Chrome Object Browser 	
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Eclipes\\ChromeDriver\\chromedriver.exe");
-		WebDriver driver=new ChromeDriver();		
+		WebDriver driver=new ChromeDriver();	
+		WebDriverWait wait = new WebDriverWait(driver,10);
+
+		
+		SoftAssert assertion = new SoftAssert();
+		
+		
 		
 		//envoke InternetExplorer Object Browser 
 		//NOTE Find out better way then to copy Class then to envoke ie
@@ -366,10 +380,80 @@ public class DemoEnv {
 		driver.findElement(By.id("UDF_L_2_1")).sendKeys("Min / Max Charictores HEREeeeeeeeeeeeeeeeee");
 	
 		
-	///////TEST for GIT
+	//////
+
+		
+        //Verify Text is present 
+//?????????		assertTrue(isTextPresent("TRANSCOM DEMO SITE (DIF 1)"));
+/*		
+		@Test
+		public void reporter()
+		{
+			System.out.println("annotation");
+			
+		}
+*/
+		
+/*		//Verify Text is present on page but not specific area
+		WebElement wholeBodyText = driver.findElement(By.tagName("body"));
+
+		if(wholeBodyText.getText().contains("Eventdate")){
+
+		System.out.println("Found it");
+
+		}else{
+
+		System.out.println("Not found");
+
+		}
+*/		
+
+		
+	//	wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"UDF_C_0_155_row\"]/div[1]/label"), "Destination Facility"));
+
+		
+		
+		
+////////Verify Text is present on page in a specific area
+		
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"datix-content\"]/div[1]/div[1]/div/font/font/b", "Reporting is anonymous unless reporter detail is completed");
+		
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"inc_ot_q20_row\"]/div[1]/label", "Mode of Transit If the patient was in transit, please select a mode of transportation from the list.");
+	//Event description text is present
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"inc_notes_row\"]/div[1]/label", "Event description  You must enter a value in this field Enter facts, not opinions. Do NOT enter names of people or other identifying information.");
+		
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"inc_actiontaken_row\"]/div[1]/label", "Immediate action taken You must enter a value in this field What actions were taken to prevent patient harm or lessen the impact?");
+		
+		
+	
+	}
+	
+        private static void VerifyDisplayedText(WebDriver driver, SoftAssert assertion, String WeblementXpath, String actualText) {
+            WebElement element = driver.findElement(By.xpath(WeblementXpath));
+            String expectedText = element.getText();
+            System.out.println("Text suppose to be :" + expectedText.replaceAll("\\s", " "));
+
+            String assertionError = "Text Matched";
+         try {
+            assertion.assertEquals(actualText, expectedText.replaceAll("\\s", " "));
+            assertion.assertAll();   
+         }
+         catch (AssertionError e) 
+            {
+              assertionError = e.toString();
+            }
+            System.out.println(assertionError);
+        }
+
+		
+		
+		
+		
+	
+		
 
 //		Thread.sleep(4000L);		
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		
 		//close current child windows
 //		driver.close();
@@ -379,6 +463,13 @@ public class DemoEnv {
 //		driver.switchto().window		
 		
 
-}
-}
+
+	}
+
+
+
+
+
+
+
 

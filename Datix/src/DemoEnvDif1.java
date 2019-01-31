@@ -8,6 +8,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
 
 public class DemoEnvDif1 {
@@ -28,6 +29,9 @@ public class DemoEnvDif1 {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
        
+        
+
+
         
        // @Test(priority=1)
 //DODCR-196	 
@@ -221,9 +225,7 @@ public class DemoEnvDif1 {
            	
 
                
-         
-               
-               
+
    
                
                
@@ -254,23 +256,30 @@ public class DemoEnvDif1 {
        }
        
        
-       
-       
-       
-       
-       
-       
 
+////////Verify Text is present on page in a specific area    , using a SoftAssert assertion = new SoftAssert();
+       SoftAssert assertion = new SoftAssert();          //Verify Text is present on page in a specific area
+
+       	//Verify Text of "TRANSCOM DEMO SITE (DIF 1)"
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"datix-content\"]/div[1]/div[1]/div/span", "TRANSCOM DEMO SITE (DIF 1)");
+		//Verify Text of "Reporting is anonymous unless reporter detail is completed"
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"datix-content\"]/div[1]/div[1]/div/font/font/b", "Reporting is anonymous unless reporter detail is completed");
 		
-		
+		//Event description = text is present
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"inc_notes_row\"]/div[1]/label", "Event description  Enter facts, not opinions. Do NOT enter names of people or other identifying information.");
+		//Immediate action taken = Text is present 
+		VerifyDisplayedText(driver, assertion, "//*[@id=\"inc_actiontaken_row\"]/div[1]/label", "Immediate action taken What actions were taken to prevent patient harm or lessen the impact?");
+	   
+    
        
 ////////Method for Verify Text is present on page in a specific area             //VerifyDisplayedText(driver, assertion, "//*[@id=\"datix-content\"]/div[1]/div[1]/div/font/font/b", "Reporting is anonymous unless reporter detail is completed");
-       private static void VerifyDisplayedText(WebDriver driver, SoftAssert assertion, String WeblementXpath, String actualText) {
+   }
+		private static void VerifyDisplayedText(WebDriver driver, SoftAssert assertion, String WeblementXpath, String actualText) {
            WebElement element = driver.findElement(By.xpath(WeblementXpath));
            String expectedText = element.getText();
            System.out.println("Text suppose to be :" + expectedText.replaceAll("\\s", " "));
 
-           String assertionError = "Text Matched";
+           String assertionError = "passed. Text Matched";
         try {
            assertion.assertEquals(actualText, expectedText.replaceAll("\\s", " "));
            assertion.assertAll();   
@@ -283,11 +292,11 @@ public class DemoEnvDif1 {
        }
 
        
+
+       
+
        
        
-       
-       
-       
-   }
+  
 
 }

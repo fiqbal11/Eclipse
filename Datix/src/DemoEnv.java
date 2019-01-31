@@ -18,6 +18,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import org.openqa.selenium.interactions.Actions;
@@ -26,10 +30,32 @@ import org.openqa.selenium.interactions.Actions;
 
 public class DemoEnv {
 
+	/*
+	
+	@BeforeSuite
+	public 
+	
+	@BeforeClass 
+	public 
+	
+	@BeforeMethod
+	public
+	
+	@BeforeTest
+	public
+	
+	@Test
+	public
+	
+*/
+	
+	
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 
 
+		
+		
 //DODCR-196
 		
 		
@@ -39,9 +65,14 @@ public class DemoEnv {
 		WebDriverWait wait = new WebDriverWait(driver,10);
 
 		
-		SoftAssert assertion = new SoftAssert();
+		SoftAssert assertion = new SoftAssert();   //Verify Text is present on page in a specific area
 		
 		
+		
+		
+		
+		
+
 		
 		//envoke InternetExplorer Object Browser 
 		//NOTE Find out better way then to copy Class then to envoke ie
@@ -414,6 +445,47 @@ public class DemoEnv {
 		
 		
 		
+		
+				
+//limit of characters of a textbox
+//		driver.findElement(By.xpath("//*[@id=\"UDF_L_0_157\"]")).sendKeys("Text_Charicter_CountText_Charicter_CountText_Charicter_Count");//input should be greater than 30 chars
+//		int actualLimit = driver.findElement(By.xpath("//*[@id=\"UDF_L_0_157\"]")).getText().length();
+//		assertEquals(actualLimit, 30);
+		
+	//	System.out.println(actualLimit);
+		
+//limit of characters of a textbox
+//        String inputfieldlength = driver.findElement(By.xpath("//*[@id=\"inc_ot_q5\"]")).getAttribute("maxlength");
+//        System.out.println("Last name's max length is - " +inputfieldlength);
+		
+//limit of characters of a textbox	
+//        driver.findElement(By.xpath("//*[@id=\"inc_ot_q5\"]")).sendKeys("abcdefghijklmnop");
+//        String ele = driver.findElement(By.xpath("//*[@id=\"inc_ot_q5\"]")).getAttribute("maxlength");
+//        System.out.println(ele);
+		
+	
+		/*
+//check if mandatory field whether it is empty or not
+		assertTrue(isTextPresent("You must enter a value in this field"), "Msg is absent/wrong/misspelled");
+		
+		{
+		boolean isTextPresent(String text){
+	        try{
+	            boolean b = driver.getPageSource().contains(text);
+	            return b;
+	        }
+	        catch(Exception e){
+	            return false;
+	        }
+	  }
+		
+		}
+		
+		*/
+		
+		
+		
+		
 ////////Verify Text is present on page in a specific area
 		
 		VerifyDisplayedText(driver, assertion, "//*[@id=\"datix-content\"]/div[1]/div[1]/div/font/font/b", "Reporting is anonymous unless reporter detail is completed");
@@ -428,7 +500,12 @@ public class DemoEnv {
 	
 	}
 	
-        private static void VerifyDisplayedText(WebDriver driver, SoftAssert assertion, String WeblementXpath, String actualText) {
+        private static boolean isTextPresent(String string) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+		private static void VerifyDisplayedText(WebDriver driver, SoftAssert assertion, String WeblementXpath, String actualText) {
             WebElement element = driver.findElement(By.xpath(WeblementXpath));
             String expectedText = element.getText();
             System.out.println("Text suppose to be :" + expectedText.replaceAll("\\s", " "));
